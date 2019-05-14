@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElementaryTasks
+namespace Task2EnvelopeAnalysis
 {
     class Program
     {
         static void Main(string[] args)
         {
-            ChessBoard ch = new ConsoleChessBoard();
-            ch.
         }
     }
-
 }
