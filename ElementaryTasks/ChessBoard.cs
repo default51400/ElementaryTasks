@@ -5,20 +5,20 @@ using System.Text;
 
 namespace ElementaryTasks
 {
-    abstract class ChessBoard
+    public abstract class ChessBoard
     {
-        private int height;
-        private int width;
+        private int _height;
+        private int _width;
 
         public int Height
         {
-            get { return height; }
-            set { height = value; } //TODO: Add Validator value
+            get { return _height; }
+            set { _height = value; } //TODO: Add Validator value
         }
         public int Width
         {
-            get { return width; }
-            set { width = value; } //TODO: Add Validator value
+            get { return _width; }
+            set { _width = value; } //TODO: Add Validator value
         }
 
         public ChessBoard(int height, int width)
@@ -28,15 +28,18 @@ namespace ElementaryTasks
         }
         public ChessBoard(string[] args)
         {
-            if (int.TryParse(args[0], out int width) && int.TryParse(args[1], out int height))
-            {
-                Width = width;
-                Height = height;
-            }
-            else
-            {
-                throw new  ArgumentException("Invalid input args");
-            }
+            ValidatorTwoIntegerNumbers validator = new ValidatorTwoIntegerNumbers(args);
+            validator.Validate();
+            //if (int.TryParse(args[0], out int width) && int.TryParse(args[1], out int height))
+            //{
+            //    this.Width = width;
+            //    this.Height = height;
+            //}
+            //else
+            //{
+            //    throw new  ArgumentException("Invalid input args");
+            //    //TODO: Добавить вызов инструкции
+            //}
         }
 
         public abstract void ShowChessBoard();

@@ -1,30 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ElementaryTasks
 {
-    class ConsoleChessBoard : ChessBoard
+    public class ConsoleChessBoard : ChessBoard
     {
-        public ConsoleChessBoard(int height, int width) : base(height,width)
+        public ConsoleChessBoard(int height, int width) : base(height, width)
         {
         }
+        //public ConsoleChessBoard(string[] args) 
+        //{
 
-        public void newConsoleChessBoard(string[] args)
-        {
-        }
+        //}
         public override void ShowChessBoard()
         {
             for (int i = 1; i <= base.Height; i++)
             {
-                for (int y = 1; y <= base.Width; y++)
+                for (int j = 1; j <= base.Width; j++)
                 {
-                    if(i%2 == 1)
-                        Console.Write("* ");
+                    if (i % 2 == 1)
+                        if (j % 2 == 1) Console.Write(" ");
+                        else Console.Write("*");
                     else
-                        Console.Write(" *");
+                    if (j % 2 == 1) Console.Write("*");
+                    else Console.Write(" ");
                 }
                 Console.WriteLine();
             }
@@ -34,8 +32,9 @@ namespace ElementaryTasks
         {
             switch (args.Length)
             {
+                //args.Lenght only = 2, because two-dimensional plane
                 case 2:
-                    if (int.TryParse(args[0], out int width) && int.TryParse(args[1], out int height))
+                    if (ValidatorTwoIntegerNumbers.Validate(args))
                     {
                         //Validate(width);
                         //Validate(height);

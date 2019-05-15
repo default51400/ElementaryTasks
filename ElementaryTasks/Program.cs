@@ -10,8 +10,8 @@ namespace ElementaryTasks
     {
         static void Main(string[] args)
         {
-            ChessBoard ch = new ConsoleChessBoard();
-            ch.
+            ChessBoard ch = new ConsoleChessBoard(args);
+            ch.ShowChessBoard();
         }
     }
 

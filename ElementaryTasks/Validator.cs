@@ -5,12 +5,32 @@ using System.Text;
 
 namespace ElementaryTasks
 {
-    public abstract class Validator : IValidator
+    public static class ValidatorTwoIntegerNumbers //: IValidator
     {
-        public void Validate()
+        //private string[] _args;
+        //public ValidatorTwoIntegerNumbers(string[] args)
+        //{
+        //    this._args = args;
+        //}
+        public static void Validate(string[] args)
         {
-            //TODO: Валидация общего значения
+            //TODO: Проверка что мы вводим 2 целочисленных значения
+            if (int.TryParse(args[0], out int width) && int.TryParse(args[1], out int height))
+            {
+                //Width = width;
+                //Height = height;
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input args");
+                //TODO: Добавить вызов инструкции
+            }
         }
+
+        //private bool IsValid()
+        //{
+        //    return true;
+        //}
 
     }
 }
