@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChessBoard.cs" />
-    <Compile Include="ConsoleChessBoard.cs" />
+    <Compile Include="ConsoleUI.cs" />
     <Compile Include="IValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,36 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ElementaryTasks
 {
-    public static class ValidatorTwoIntegerNumbers //: IValidator
+    public static class Validator //: IValidator
     {
-        //private string[] _args;
-        //public ValidatorTwoIntegerNumbers(string[] args)
-        //{
-        //    this._args = args;
-        //}
-        public static void Validate(string[] args)
+
+        public static bool IsValid(string[] args, out int outHeight, out int outWidth)
         {
             //TODO: Проверка что мы вводим 2 целочисленных значения
             if (int.TryParse(args[0], out int width) && int.TryParse(args[1], out int height))
             {
-                //Width = width;
-                //Height = height;
+                outHeight = height;
+                outWidth = width;
+                return true;
             }
             else
             {
-                throw new ArgumentException("Invalid input args");
-                //TODO: Добавить вызов инструкции
+                outHeight = 0;
+                outWidth = 0;
+                return false;
             }
-        }
 
-        //private bool IsValid()
-        //{
-        //    return true;
-        //}
+
+        }
 
     }
 }
