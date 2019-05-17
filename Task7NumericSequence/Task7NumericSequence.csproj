@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7E482697-286D-4347-8BBC-F839EAF93CCF}</ProjectGuid>
+    <ProjectGuid>{F0AA373C-093E-4E96-A133-B9F1D690F4B3}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ElementaryTasks</RootNamespace>
-    <AssemblyName>ElementaryTasks</AssemblyName>
+    <RootNamespace>Task7NumericSequence</RootNamespace>
+    <AssemblyName>Task7NumericSequence</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,15 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChessBoard.cs" />
-    <Compile Include="ConsoleUI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="ElementaryClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

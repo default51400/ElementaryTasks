@@ -2,27 +2,32 @@
 
 namespace ElementaryTasks
 {
-    public static class Validator //: IValidator
+    public static class Validator
     {
 
-        public static bool IsValid(string[] args, out int outHeight, out int outWidth)
+        public static bool IsValid(string[] args)
         {
-            //TODO: Проверка что мы вводим 2 целочисленных значения
-            if (int.TryParse(args[0], out int width) && int.TryParse(args[1], out int height))
+            switch (args.Length)
             {
-                outHeight = height;
-                outWidth = width;
-                return true;
-            }
-            else
-            {
-                outHeight = 0;
-                outWidth = 0;
-                return false;
-            }
+                //args.Lenght only = 2, because two-dimensional plane of ChessBoard
+                case 2:
+                    if (int.TryParse(args[0], out int height) && int.TryParse(args[1], out int width))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                        throw new ArgumentException("Values is not integer");
+                    }
+                    break;
 
+                default:
+                    return false;
+                    throw new ArgumentException("There should be 2 variables");
+                    break;
+            }
 
         }
-
     }
 }
