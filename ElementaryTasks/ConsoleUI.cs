@@ -12,11 +12,11 @@ namespace ElementaryTasks
         public ConsoleUI(string[] args)
         {
             this._args = args;
-            CheckExceptions();
-            Show();
+            CheckArguments();
+            ShowChessBoard();
         }
 
-        public void CheckExceptions()
+        private void CheckArguments()
         {
             try
             {
@@ -24,27 +24,32 @@ namespace ElementaryTasks
                 {
                     _board = new ChessBoard(_args);
                 }
+                else
+                {
+                    throw new ArgumentException("Invalid arguments");
+                }
             }
             
             catch (ArgumentOutOfRangeException ex)
             {
                 Console.WriteLine("Message:\n" + ex.Message);
-                Instruction();
+                ShowInstruction();
             }
             catch (ArgumentException ex)
             {
                 Console.WriteLine("Message:\n" + ex.Message);
-                Instruction();
+                ShowInstruction();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Message:\n" + ex.Message);
-                Instruction();
+                ShowInstruction();
             }
         }
         //TODO: Set Console size
+        //TODO: Check ConsoleSize, if SIZE>ConsSize =reinput
 
-        public void Instruction()
+        private void ShowInstruction()
         {
             Console.WriteLine(LINE_SEPARATOR);
             Console.WriteLine("Your input isn't valid. \nPlease read instruction for setting height and width of chess board:");
@@ -58,10 +63,10 @@ namespace ElementaryTasks
             Console.Write("Please input correct: ");
             string inputValue = Console.ReadLine();
             _args =  inputValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            ConsoleUI cui= new ConsoleUI(_args);
+            CheckArguments();
         }
 
-        public void Show()
+        private void ShowChessBoard()
         {
             for (int i = 1; i <= _board.Height; i++)
             {

@@ -10,10 +10,7 @@ namespace ElementaryTasks
     {
         static void Main(string[] args)
         {
-            args[0] = "-1";
-            args[1] = "3";
             ConsoleUI chessBoard1 = new ConsoleUI(args);
-            
         }
     }
 

@@ -13,15 +13,18 @@ namespace ElementaryTasks
         public int Height
         {
             get { return _height; }
-            set { _height = ValidateSide(value); } 
+            set { _height = value; } 
         }
         public int Width
         {
             get { return _width; }
-            set { _width = ValidateSide(value); } 
+            set { _width = value; } 
         }
         public ChessBoard()
         {
+            // Default values for standart chessBoard
+            Height = 8; 
+            Width = 8;
         }
         public ChessBoard(int height, int width)
         {
@@ -31,21 +34,22 @@ namespace ElementaryTasks
         public ChessBoard(string[] args)
         {
             Validator.IsValid(args);
-            this.Height = ValidateSide(int.Parse(args[0]));
-            this.Width = ValidateSide(int.Parse(args[1]));
+            this.Height = int.Parse(args[0]);
+            this.Width = int.Parse(args[1]);
         }
-        private int ValidateSide(int side)
-        {
-            if (side < 0)
-            {
-                throw new ArgumentOutOfRangeException("Input args must be > 0");
-            }
-            else
-            {
-                return side;
-            }
 
-        }
+        //private int GreaterZero(int side)
+        //{
+        //    if (side < 0)
+        //    {
+        //        //throw new ArgumentOutOfRangeException("Input args must be > 0");
+        //    }
+        //    else
+        //    {
+        //        return side;
+        //    }
+
+        //}
 
     }
 }

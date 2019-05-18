@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace ElementaryTasks
+
+namespace Task8FibonacciNumbers
 {
     public static class Validator
     {
@@ -12,18 +13,25 @@ namespace ElementaryTasks
                 case 0:
                     throw new IndexOutOfRangeException("Count values must be = 2.");
                     break;
-                //args.Lenght only = 2, because two-dimensional plane of ChessBoard
+                //args.Lenght only = 2, because range take onnly  argumnts
                 case 2:
-                    if (int.TryParse(args[0], out int height) && int.TryParse(args[1], out int width))
+                    if (int.TryParse(args[0], out int startPosition) && int.TryParse(args[1], out int endPosition))
                     {
-                        if ((height > 0) && (width > 0))
+                        if (startPosition < endPosition)
                         {
-                            return true;
+                            if ((startPosition >= 0) && (endPosition >= 0))
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                                throw new ArgumentException("Values must be > 0");
+                            }
                         }
                         else
                         {
-                            return false;
-                            throw new ArgumentException("Values must be > 0");
+                            throw new ArgumentException("First values must be less than second value.");
                         }
                     }
                     else
