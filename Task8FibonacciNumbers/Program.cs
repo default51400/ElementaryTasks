@@ -10,7 +10,7 @@ namespace Task8FibonacciNumbers
     {
         static void Main(string[] args)
         {
-            ConsoleUI visual = new ConsoleUI(args);
+            ConsoleUI visualDisplay = new ConsoleUI(args);
         }
     }
 }

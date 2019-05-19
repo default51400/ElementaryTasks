@@ -10,6 +10,7 @@ namespace Task7NumericSequence
     {
         static void Main(string[] args)
         {
+            ConsoleUI visualDisplay = new ConsoleUI(args);
         }
     }
 }

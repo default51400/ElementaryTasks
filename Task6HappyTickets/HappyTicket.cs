@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task6HappyTickets
 {
-    class Program
+    class HappyTicket
     {
-        static void Main(string[] args)
-        {
 
-        }
     }
 }
