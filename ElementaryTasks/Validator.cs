@@ -5,40 +5,41 @@ namespace ElementaryTasks
     public static class Validator
     {
 
-        public static bool IsValid(string[] args)
+        public static BoardArgumentsValidationResult IsValid(string[] args)
         {
+            BoardArgumentsValidationResult result = new BoardArgumentsValidationResult();
             switch (args.Length)
             {
                 case 0:
-                    throw new IndexOutOfRangeException("Count values must be = 2.");
+                    result.Exception = new ArgumentOutOfRangeException("Count values must be = 2.");
                     break;
+
                 //args.Lenght only = 2, because two-dimensional plane of ChessBoard
                 case 2:
                     if (int.TryParse(args[0], out int height) && int.TryParse(args[1], out int width))
                     {
                         if ((height > 0) && (width > 0))
                         {
-                            return true;
+                            result.IsValid = true;
+                            result.Height = height;
+                            result.Width = width;
                         }
                         else
                         {
-                            return false;
-                            throw new ArgumentException("Values must be > 0");
+                            result.Exception = new ArgumentException("Values must be > 0");
                         }
                     }
                     else
                     {
-                        return false;
-                        throw new ArgumentException("Values is not integer");
+                        result.Exception = new ArgumentException("Values is not integer");
                     }
                     break;
 
                 default:
-                    return false;
-                    throw new ArgumentException("There should be 2 variables");
+                    result.Exception = new ArgumentException("There should be 2 variables");
                     break;
             }
-
+            return result;
         }
     }
 }

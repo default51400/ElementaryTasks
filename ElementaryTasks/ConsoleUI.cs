@@ -2,75 +2,13 @@
 
 namespace ElementaryTasks
 {
-    public class ConsoleUI
+    public class ConsoleUI : IDraw
     {
-        private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
-
-        private ChessBoard _board;
-        private string[] _args;
-        
-        public ConsoleUI(string[] args)
+        public void Draw(IBoard board)
         {
-            this._args = args;
-            CheckArguments();
-            ShowChessBoard();
-        }
-
-        private void CheckArguments()
-        {
-            try
+            for (int i = 1; i <= board.Height; i++)
             {
-                if (Validator.IsValid(_args))
-                {
-                    _board = new ChessBoard(_args);
-                }
-                else
-                {
-                    throw new ArgumentException("Invalid arguments");
-                }
-            }
-            
-            catch (ArgumentOutOfRangeException ex)
-            {
-                Console.WriteLine("Message:\n" + ex.Message);
-                ShowInstruction();
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine("Message:\n" + ex.Message);
-                ShowInstruction();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Message:\n" + ex.Message);
-                ShowInstruction();
-            }
-        }
-        //TODO: Set Console size
-        //TODO: Check ConsoleSize, if SIZE>ConsSize =reinput
-
-        private void ShowInstruction()
-        {
-            Console.WriteLine(LINE_SEPARATOR);
-            Console.WriteLine("Your input isn't valid. \nPlease read instruction for setting height and width of chess board:");
-            Console.WriteLine("Input supports only two unsigned integer number separated by witespace (\"_\").");
-            Console.WriteLine(LINE_SEPARATOR);
-            ReInput();
-        }
-
-        private void ReInput()
-        {
-            Console.Write("Please input correct: ");
-            string inputValue = Console.ReadLine();
-            _args =  inputValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            CheckArguments();
-        }
-
-        private void ShowChessBoard()
-        {
-            for (int i = 1; i <= _board.Height; i++)
-            {
-                for (int j = 1; j <= _board.Width; j++)
+                for (int j = 1; j <= board.Width; j++)
                 {
                     if (i % 2 == 1)
                         if (j % 2 == 1)
@@ -99,6 +37,5 @@ namespace ElementaryTasks
                 Console.WriteLine();
             }
         }
-
     }
 }

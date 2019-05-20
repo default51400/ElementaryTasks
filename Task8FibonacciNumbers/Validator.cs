@@ -21,7 +21,7 @@ namespace Task8FibonacciNumbers
                         {
                             if ((startPosition >= 0) && (endPosition >= 0))
                             {
-                                if (endPosition > 2147483647)
+                                if (endPosition > int.MaxValue)
                                 {
                                     throw new ArgumentException("Values must be < 2147483647");
                                 }

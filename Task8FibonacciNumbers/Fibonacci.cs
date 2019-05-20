@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Task8FibonacciNumbers
 {
-    static class Fibonacci
+    public static class Fibonacci
     {
         public static int CalculateFibonacci(int n)
         {
@@ -52,17 +53,17 @@ namespace Task8FibonacciNumbers
             return currentString.Remove(currentString.Length-2, 1);
         }
 
-        public static List<int> GetSequenceInRange(string[] args)
+        public static IEnumerable GetSequenceRange(string[] args)
         {
-            int startRange = int.Parse(args[0]);
-            int endRange = int.Parse(args[1]);
+            int startRange = Convert.ToInt32(args[0]);
+            int endRange = Convert.ToInt32(args[1]);
 
             if (startRange < 0 || endRange < 0)
             {
                 throw new ArgumentException("Range value should not be less then 0.");
             }
 
-            List<int> values = new List<int>();
+            //List<int> values = new List<int>();
             for (int number = 0; number < endRange; number++)
             {
                 if (CalculateFibonacci(number) >= startRange)
@@ -72,11 +73,11 @@ namespace Task8FibonacciNumbers
                         break;
                     }
 
-                    values.Add(CalculateFibonacci(number));
+                    yield return CalculateFibonacci(number);
+                    //values.Add(CalculateFibonacci(number));
                 }
             }
-
-            return values;
         }
+        
     }
 }       

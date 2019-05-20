@@ -4,46 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task8FibonacciNumbers
+namespace ElementaryTasks
 {
-    class ConsoleUI
+    public class ConsoleManager
     {
         private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
 
+        public IBoard Board { get; set; }
         private string[] _args;
 
-        public ConsoleUI(string[] args)
+        public ConsoleManager(string[] args)
         {
-            this._args = args;
-            ShowValues();
+            _args = args;
+            CheckArguments();
         }
 
-        private void ShowValues()
+        private void CheckArguments()
         {
             try
             {
-                if (Validator.IsValid(_args))
+                BoardArgumentsValidationResult result = Validator.IsValid(_args);
+                if (result.IsValid)
                 {
-                    string stringValues = string.Empty;
-                    foreach (var item in Fibonacci.GetSequenceRange(_args))
-                    {
-                        stringValues += item;  //toBuilder
-                        stringValues += ", ";
-                    }
-                    Console.WriteLine(stringValues.Remove(stringValues.Length - 2, 1));
+                    Board = new ChessBoard(result.Height, result.Width);
                 }
                 else
                 {
+                    throw new ArgumentException("Arguments are not valid", result.Exception);
                 }
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                Console.WriteLine("Message:\n" + ex.Message);
-                ShowInstruction();
             }
             catch (ArgumentException ex)
             {
-                Console.WriteLine("Message:\n" + ex.Message);
+                Console.WriteLine("Message:\n" + ex.Message + "\t" + ex?.InnerException.Message);
                 ShowInstruction();
             }
             catch (Exception ex)
@@ -52,10 +44,13 @@ namespace Task8FibonacciNumbers
                 ShowInstruction();
             }
         }
+        //TODO: Set Console size
+        //TODO: Check ConsoleSize, if SIZE>ConsSize =reinput
+
         private void ShowInstruction()
         {
             Console.WriteLine(LINE_SEPARATOR);
-            Console.WriteLine("Your input isn't valid. \nPlease read instruction:");
+            Console.WriteLine("Your input isn't valid. \nPlease read instruction for setting height and width of chess board:");
             Console.WriteLine("Input supports only two unsigned integer number separated by witespace (\"_\").");
             Console.WriteLine(LINE_SEPARATOR);
             ReInput();
@@ -66,7 +61,7 @@ namespace Task8FibonacciNumbers
             Console.Write("Please input correct: ");
             string inputValue = Console.ReadLine();
             _args = inputValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            ShowValues();
+            CheckArguments();
         }
     }
 }
