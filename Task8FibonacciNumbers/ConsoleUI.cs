@@ -24,11 +24,10 @@ namespace Task8FibonacciNumbers
             {
                 if (Validator.IsValid(_args))
                 {
-                    string stringValues = string.Empty;
+                    StringBuilder stringValues = null;
                     foreach (var item in Fibonacci.GetSequenceRange(_args))
                     {
-                        stringValues += item;  //toBuilder
-                        stringValues += ", ";
+                        stringValues.AppendFormat("{0}, ",item);
                     }
                     Console.WriteLine(stringValues.Remove(stringValues.Length - 2, 1));
                 }

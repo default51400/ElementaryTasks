@@ -10,13 +10,12 @@ namespace Task7NumericSequence
     {
         public static string Calculate(int number)
         {
-            string result = string.Empty;
+            StringBuilder result = null;
             for (int i = 0; i*i < number; i++)
             {
-                result += i;
-                result += ", ";
+                result.AppendFormat("{0}, ", i);
             }
-            return result.Remove(result.Length - 2, 1);
+            return result.Remove(result.Length - 2, 1).ToString();
         }
     }
 }
