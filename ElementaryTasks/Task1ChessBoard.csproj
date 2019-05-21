@@ -46,7 +46,7 @@
     <Compile Include="ChessBoard.cs" />
     <Compile Include="ConsoleManager.cs" />
     <Compile Include="ConsoleUI.cs" />
-    <Compile Include="IBoard.cs" />
+    <Compile Include="ISurface.cs" />
     <Compile Include="IDraw.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

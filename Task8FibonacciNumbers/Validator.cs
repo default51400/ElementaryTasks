@@ -12,7 +12,6 @@ namespace Task8FibonacciNumbers
             {
                 case 0:
                     throw new IndexOutOfRangeException("Count values must be = 2.");
-                    break;
                 //args.Lenght only = 2, because range take onnly  argumnts
                 case 2:
                     if (int.TryParse(args[0], out int startPosition) && int.TryParse(args[1], out int endPosition))
@@ -43,12 +42,10 @@ namespace Task8FibonacciNumbers
                         return false;
                         throw new ArgumentException("Values is not integer");
                     }
-                    break;
 
                 default:
                     return false;
                     throw new ArgumentException("There should be 2 variables");
-                    break;
             }
 
         }

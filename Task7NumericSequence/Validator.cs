@@ -15,7 +15,6 @@ namespace Task7NumericSequence
             {
                 case 0:
                     throw new IndexOutOfRangeException("Count values must be = 1.");
-                    break;
                 //args.Lenght only = 2, because range take onnly  argumnts
                 case 1:
                     if (int.TryParse(args[0], out int finalNumber))
@@ -38,15 +37,10 @@ namespace Task7NumericSequence
                     else
                     {
                         throw new ArgumentException("Values is not integer. (Min value = -2147483648, max value = 2147483647)");
-                        return false;
-                        
                     }
-                    break;
 
                 default:
-                    return false;
                     throw new ArgumentException("There should be 1 variables");
-                    break;
             }
 
         }
