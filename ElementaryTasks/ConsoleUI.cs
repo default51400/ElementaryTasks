@@ -4,8 +4,9 @@ namespace ElementaryTasks
 {
     public class ConsoleUI : IDraw
     {
-        public void Draw(IBoard board)
+        public void Draw(ISurface board)
         {
+            //TODO: Add ICell[,], and set Color of cell
             for (int i = 1; i <= board.Height; i++)
             {
                 for (int j = 1; j <= board.Width; j++)

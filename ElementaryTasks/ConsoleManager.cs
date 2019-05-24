@@ -10,12 +10,12 @@ namespace ElementaryTasks
     {
         private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
 
-        public IBoard Board { get; set; }
+        public ISurface Board { get; set; }
         private string[] _args;
 
         public ConsoleManager(string[] args)
         {
-            _args = args;
+            _args = (string[])args.Clone(); //TODO: ASK: IT IS TRUE?
             CheckArguments();
         }
 
@@ -26,6 +26,7 @@ namespace ElementaryTasks
                 BoardArgumentsValidationResult result = Validator.IsValid(_args);
                 if (result.IsValid)
                 {
+                    Console.Clear();
                     Board = new ChessBoard(result.Height, result.Width);
                 }
                 else
