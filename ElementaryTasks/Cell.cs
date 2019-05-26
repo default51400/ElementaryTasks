@@ -6,18 +6,22 @@ using System.Threading.Tasks;
 
 namespace ElementaryTasks
 {
-    class Cell : ICell
+    public class Cell : ICell
     {
-        public int Heigth { get; private set; }
-        public int Width { get; private set; }
-        public bool IsDark { get; private set; }
+        #region Props
+        public int Height { get; set; }
+        public int Width { get; set; }
+        public bool IsDark { get; set; }
+        #endregion
 
-        public Cell(int heigth, int width, bool isDark)
+        #region Ctor
+        public Cell(int height, int width)
         {
-            this.Heigth = heigth;
+            this.Height = height;
             this.Width = width;
-            this.IsDark = isDark;
         }
+        #endregion
+
 
     }
 }

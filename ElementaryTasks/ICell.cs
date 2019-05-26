@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace ElementaryTasks
 {
-    interface ICell
+    public interface ICell
     {
         bool IsDark { get; }
-        int Heigth { get; }
+        int Height { get; }
         int Width { get; }
+
         //Point gorizontalX
         //Point verticalY
     }

@@ -1,29 +1,16 @@
-﻿using System;
+﻿ using System;
 
 namespace ElementaryTasks
 {
     public class ConsoleUI : IDraw
     {
-        public void Draw(ISurface board)
+        public void Draw(ISurface<ICell> board)
         {
-            //TODO: Add ICell[,], and set Color of cell
-            for (int i = 1; i <= board.Height; i++)
+            for (int i = 0; i < board.Height; i++)
             {
-                for (int j = 1; j <= board.Width; j++)
+                for (int j = 0; j < board.Width; j++)
                 {
-                    if (i % 2 == 1)
-                        if (j % 2 == 1)
-                        {
-                            Console.BackgroundColor = ConsoleColor.White;
-                            Console.Write(" ");
-                        }
-                        else
-                        {
-                            Console.BackgroundColor = ConsoleColor.Black;
-                            Console.Write(" ");
-                        }
-                    else
-                    if (j % 2 == 1)
+                    if (board.Cells[i, j].IsDark == true)
                     {
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write(" ");
@@ -33,6 +20,7 @@ namespace ElementaryTasks
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.Write(" ");
                     }
+                    
                 }
                 Console.ResetColor();
                 Console.WriteLine();

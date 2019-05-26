@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ElementaryTasks
 {
-    public class ChessBoard : ISurface
+    public class ChessBoard : ISurface<ICell>
     {
         #region Fields & CONST
         private const int DEFAULT_HEIGHT = 8;
@@ -15,6 +15,7 @@ namespace ElementaryTasks
         #endregion
 
         #region Props
+        public Cell[,] Cells { get; private set; }
         public int Height
         {
             get { return _height; }
@@ -41,8 +42,37 @@ namespace ElementaryTasks
         {
             this.Height = height;
             this.Width = width;
+            Cells = GetEmptySurface();
         }
         #endregion
+
+        public Cell[,] GetEmptySurface()
+        {
+            Cells = new Cell[Height, Width];
+            
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    Cells[i,j] = new Cell(i, j);
+
+                    Cells[i,j].IsDark = true;
+                    if (i % 2 == 1)
+                        if (j % 2 == 1)
+                            Cells[i,j].IsDark = false;
+                        else
+                            Cells[i,j].IsDark = true;
+                    else
+                    if (j % 2 == 1)
+                        Cells[i, j].IsDark = true;
+                    else
+                        Cells[i, j].IsDark = false;
+                }
+
+            }
+            
+            return Cells;
+        }
 
         private int Validate(int side)
         {
@@ -52,6 +82,5 @@ namespace ElementaryTasks
             }
             else throw new ArgumentException("The value length of sides must be set in a segment: 0 < value < 2147483647");
         }
-
     }
 }

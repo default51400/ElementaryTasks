@@ -8,58 +8,68 @@ namespace ElementaryTasks
 {
     public class ConsoleManager
     {
+        #region Fields
         private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
-
-        public ISurface Board { get; set; }
         private string[] _args;
+        private BoardArgumentsValidationResult result;
+        #endregion
 
+        #region Props
+        public ISurface<ICell> Board { get; set; }
+        #endregion
+
+        #region Ctor
         public ConsoleManager(string[] args)
         {
-            _args = (string[])args.Clone(); //TODO: ASK: IT IS TRUE?
+            //TODO: ASK: IT IS TRUE? Так безопасно? если массив строк то у нас поидее и так норм.
+            _args = (string[])args.Clone(); 
             CheckArguments();
         }
+        #endregion
 
         private void CheckArguments()
         {
             try
             {
-                BoardArgumentsValidationResult result = Validator.IsValid(_args);
+                result = Validator.IsValid(_args);
                 if (result.IsValid)
-                {
-                    Console.Clear();
-                    Board = new ChessBoard(result.Height, result.Width);
-                }
+                    PrintResult();
                 else
-                {
-                    throw new ArgumentException("Arguments are not valid", result.Exception);
-                }
+                    throw new ArgumentException("Arguments are not valid.", result.Exception);
             }
             catch (ArgumentException ex)
             {
-                Console.WriteLine("Message:\n" + ex.Message + "\t" + ex?.InnerException.Message);
+                Console.WriteLine("\nAttention:\n" + ex.Message + "\t" + ex?.InnerException.Message);
                 ShowInstruction();
+                ReInput();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Message:\n" + ex.Message);
+                Console.WriteLine("\nAttention:\n" + ex.Message);
                 ShowInstruction();
+                ReInput();
             }
         }
+        public void PrintResult()
+        {
+            Console.Clear();
+            Board = new ChessBoard(result.Height, result.Width);
+        }
+
         //TODO: Set Console size
         //TODO: Check ConsoleSize, if SIZE>ConsSize =reinput
 
         private void ShowInstruction()
         {
             Console.WriteLine(LINE_SEPARATOR);
-            Console.WriteLine("Your input isn't valid. \nPlease read instruction for setting height and width of chess board:");
-            Console.WriteLine("Input supports only two unsigned integer number separated by witespace (\"_\").");
+            Console.WriteLine("Please read instruction for setting height and width of chess board:");
+            Console.WriteLine("Input supports only two unsigned integer number separated by witespace (\"_\"). (Example: 8 8)");
             Console.WriteLine(LINE_SEPARATOR);
-            ReInput();
         }
 
         private void ReInput()
         {
-            Console.Write("Please input correct: ");
+            Console.Write("\nPlease input correct: ");
             string inputValue = Console.ReadLine();
             _args = inputValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
             CheckArguments();

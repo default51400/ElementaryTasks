@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ElementaryTasks
 {
     public class BoardArgumentsValidationResult
-    { 
+    {
         public bool IsValid { get; set; }
         public Exception Exception { get; set; }
         public int Height { get; set; }
