@@ -69,6 +69,7 @@ namespace ElementaryTasks
 
         private void ReInput()
         {
+            //TODO: ONE VALIDATE
             Console.Write("\nPlease input correct: ");
             string inputValue = Console.ReadLine();
             _args = inputValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);

@@ -10,7 +10,7 @@ namespace ElementaryTasks
             {
                 for (int j = 0; j < board.Width; j++)
                 {
-                    if (board.Cells[i, j].IsDark == true)
+                    if (board.Cells[i, j].IsDark)
                     {
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write(" ");
