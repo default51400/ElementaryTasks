@@ -39,7 +39,7 @@ namespace Task3TriangleSort
 
         public override string ToString()
         {
-            return string.Format("[{0}]: {1:N2} cm", Name, Area);
+            return string.Format($"[{Name}]: {Area:N2} cm");
         }
 
     }

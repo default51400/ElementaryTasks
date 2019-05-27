@@ -24,15 +24,16 @@ namespace Task8FibonacciNumbers
             {
                 if (Validator.IsValid(_args))
                 {
-                    StringBuilder stringValues = null;
+                    StringBuilder stringValues = new StringBuilder();
                     foreach (var item in Fibonacci.GetSequenceRange(_args))
                     {
-                        stringValues.AppendFormat("{0}, ",item);
+                        stringValues.AppendFormat($"{item}, ");
                     }
                     Console.WriteLine(stringValues.Remove(stringValues.Length - 2, 1));
                 }
                 else
                 {
+                    Console.WriteLine("Values are not valid.");
                 }
             }
             catch (ArgumentOutOfRangeException ex)
@@ -55,7 +56,7 @@ namespace Task8FibonacciNumbers
         {
             Console.WriteLine(LINE_SEPARATOR);
             Console.WriteLine("Your input isn't valid. \nPlease read instruction:");
-            Console.WriteLine("Input supports only two unsigned integer number separated by witespace (\"_\").");
+            Console.WriteLine("Input supports only two unsigned integer number separated by comma (\",\"). (Example: 5, 99)");
             Console.WriteLine(LINE_SEPARATOR);
             ReInput();
         }

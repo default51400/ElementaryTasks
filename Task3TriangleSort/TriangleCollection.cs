@@ -42,7 +42,7 @@ namespace Task3TriangleSort
             {
                 for (int i = 0; i < triangleList.Count; i++)
                 {
-                    result += string.Format("{0}.{1}\n", i + 1, triangleList[i].ToString());
+                    result += string.Format($"{i+1}.{triangleList[i].ToString()}\n");
                 }
                 return result;
             }

@@ -36,7 +36,7 @@ namespace Task8FibonacciNumbers
                 throw new ArgumentException("Range value should not be less then 1.");
             }
 
-            string currentString = string.Empty;
+            StringBuilder currentString = new StringBuilder();
             for (int number = 0; number < endRange; number++)
             {
                 if (CalculateFibonacci(number) >= startRange)
@@ -46,11 +46,10 @@ namespace Task8FibonacciNumbers
                         break;
                     }
 
-                    currentString += string.Format(CalculateFibonacci(number) + ", ");
-                }
+                    currentString.AppendFormat($"{CalculateFibonacci(number)}, ");                }
             }
 
-            return currentString.Remove(currentString.Length-2, 1);
+            return currentString.Remove(currentString.Length-2, 1).ToString();
         }
 
         public static IEnumerable GetSequenceRange(string[] args)

@@ -14,6 +14,8 @@ namespace Task8FibonacciNumbers
                     throw new IndexOutOfRangeException("Count values must be = 2.");
                 //args.Lenght only = 2, because range take onnly  argumnts
                 case 2:
+                    //string arguments = args[0]
+                    args[0] = args[0].Trim(new char[] { ',' });
                     if (int.TryParse(args[0], out int startPosition) && int.TryParse(args[1], out int endPosition))
                     {
                         if (startPosition < endPosition)
