@@ -14,18 +14,16 @@ namespace Task7NumericSequence
 
         public ConsoleUI(string[] args)
         {
-            this._args = args;
-            ShowValues();
+            this._args = (string[])args.Clone();
+            ShowValues(_args);
         }
 
-        private void ShowValues()
+        private void ShowValues(string[] args)
         {
             try
             {
-                if (Validator.IsValid(_args))
-                {
-                    Console.WriteLine(NumericSequence.Calculate(int.Parse(_args[0])) ); 
-                }
+                if (Validator.IsValid(args))
+                    PrintResult(args);
             }
             catch (ArgumentOutOfRangeException ex)
             {
@@ -43,11 +41,20 @@ namespace Task7NumericSequence
                 ShowInstruction();
             }
         }
+
+        private void PrintResult(string[] args)
+        {
+            Sequence sequence = new NumericSequence(0, int.Parse(args[0]));  //TODO: ASK About zero;
+            IEnumerable<int> sequenceCollection = sequence.GetSequenceCollection();
+
+            Console.WriteLine(sequence.GetStringSequence(sequenceCollection).ToString());
+        }
+
         private void ShowInstruction()
         {
             Console.WriteLine(LINE_SEPARATOR);
             Console.WriteLine("Your input isn't valid. \nPlease read instruction:");
-            Console.WriteLine("Input supports only one unsigned integer number.");
+            Console.WriteLine("Input supports only one unsigned integer number.  (Example: 898)");
             Console.WriteLine(LINE_SEPARATOR);
             ReInput();
         }
@@ -55,8 +62,7 @@ namespace Task7NumericSequence
         private void ReInput()
         {
             Console.Write("Please input correct: ");
-            _args[0] = Console.ReadLine();
-            ShowValues();
+            ShowValues(Console.ReadLine().Split());
         }
     }
 }

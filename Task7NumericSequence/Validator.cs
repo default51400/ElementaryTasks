@@ -29,7 +29,6 @@ namespace Task7NumericSequence
                         }
                         else
                         {
-                            //return false;
                             throw new ArgumentException("Values must be > 0");
                         }
 

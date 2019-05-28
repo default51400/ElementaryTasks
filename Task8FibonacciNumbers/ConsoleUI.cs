@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Task7NumericSequence;
+
 namespace Task8FibonacciNumbers
 {
     class ConsoleUI
@@ -15,21 +17,16 @@ namespace Task8FibonacciNumbers
         public ConsoleUI(string[] args)
         {
             this._args = args;
-            ShowValues();
+            ShowValues(_args);
         }
 
-        private void ShowValues()
+        private void ShowValues(string[] args)
         {
             try
             {
-                if (Validator.IsValid(_args))
+                if (Validator.IsValid(args))
                 {
-                    StringBuilder stringValues = new StringBuilder();
-                    foreach (var item in Fibonacci.GetSequenceRange(_args))
-                    {
-                        stringValues.AppendFormat($"{item}, ");
-                    }
-                    Console.WriteLine(stringValues.Remove(stringValues.Length - 2, 1));
+                    PrintResult(args); 
                 }
                 else
                 {
@@ -52,6 +49,21 @@ namespace Task8FibonacciNumbers
                 ShowInstruction();
             }
         }
+
+        private void PrintResult(string[] args)
+        {
+            Sequence sequence = new FibonacciSequence(int.Parse(args[0]), int.Parse(args[1]));
+            IEnumerable<int> sequenceCollection = sequence.GetSequenceCollection();
+
+            Console.WriteLine(sequence.GetStringSequence(sequenceCollection).ToString());
+            //StringBuilder stringValues = new StringBuilder();
+            //foreach (var item in FibonacciSequence.GetSequenceRange(args))
+            //{
+            //    stringValues.AppendFormat($"{item}, ");
+            //}
+            //Console.WriteLine(stringValues.Remove(stringValues.Length - 2, 1));
+        }
+
         private void ShowInstruction()
         {
             Console.WriteLine(LINE_SEPARATOR);
@@ -64,9 +76,7 @@ namespace Task8FibonacciNumbers
         private void ReInput()
         {
             Console.Write("Please input correct: ");
-            string inputValue = Console.ReadLine();
-            _args = inputValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            ShowValues();
+            ShowValues(Console.ReadLine().Split());
         }
     }
 }

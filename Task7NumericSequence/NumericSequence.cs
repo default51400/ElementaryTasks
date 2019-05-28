@@ -6,17 +6,39 @@ using System.Threading.Tasks;
 
 namespace Task7NumericSequence
 {
-    static class NumericSequence
+    class NumericSequence: Sequence
     {
-        public static string Calculate(int number)
+        public NumericSequence(int leftNumber, int rightNumber) : base(leftNumber, rightNumber)
+        {
+            leftNumber = 0;
+        }
+        public override IEnumerable<int> GetSequenceCollection()
+        {
+                for (int i = LeftNumber; i * i < RightNumber; i++)
+                {
+                    yield return i;
+                }
+        }
+        public override StringBuilder GetStringSequence(IEnumerable<int> sequenceCollection)
         {
             StringBuilder result = new StringBuilder();
-            for (int i = 0; i*i < number; i++)
+            bool firstNumber = true;
+
+            foreach (var number in sequenceCollection)
             {
-                //result.AppendFormat("{0}, ", i);
-                result.AppendFormat($"{i}, ");
+                if (firstNumber)
+                {
+                    result.Append(number);
+                    firstNumber = false;
+                }
+                else
+                {
+                    result.Append(", ");
+                    result.Append(number);
+                }
             }
-            return result.Remove(result.Length - 2, 1).ToString();
+
+            return result;
         }
     }
 }
