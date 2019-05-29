@@ -8,7 +8,7 @@ namespace Task7NumericSequence
 {
     public abstract class Sequence
     {
-        public int LeftNumber { get; private set; }
+        public virtual int LeftNumber { get; private set; }
         public int RightNumber { get; private set; }
 
         public Sequence(int leftNumber, int rightNumber)
@@ -18,7 +18,28 @@ namespace Task7NumericSequence
         }
 
         public abstract IEnumerable<int> GetSequenceCollection();
-        public abstract StringBuilder GetStringSequence(IEnumerable<int> sequenceCollection);
-       
+
+        public virtual StringBuilder GetStringSequence(IEnumerable<int> sequenceCollection)
+        {
+            StringBuilder result = new StringBuilder();
+            bool firstNumber = true;
+
+            foreach (var number in sequenceCollection)
+            {
+                if (firstNumber)
+                {
+                    result.Append(number);
+                    firstNumber = false;
+                }
+                else
+                {
+                    result.Append(", ");
+                    result.Append(number);
+                }
+            }
+
+            return result;
+        }
+
     }
 }

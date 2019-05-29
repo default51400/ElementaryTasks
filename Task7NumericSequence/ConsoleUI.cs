@@ -44,7 +44,8 @@ namespace Task7NumericSequence
 
         private void PrintResult(string[] args)
         {
-            Sequence sequence = new NumericSequence(0, int.Parse(args[0]));  //TODO: ASK About zero;
+            //TODO: Это по идее выделить в Main()
+            Sequence sequence = new NumericSequence(int.Parse(args[0]));
             IEnumerable<int> sequenceCollection = sequence.GetSequenceCollection();
 
             Console.WriteLine(sequence.GetStringSequence(sequenceCollection).ToString());

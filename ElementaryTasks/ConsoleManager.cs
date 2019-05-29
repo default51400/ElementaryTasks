@@ -15,13 +15,12 @@ namespace ElementaryTasks
         #endregion
 
         #region Props
-        public ISurface<ICell> Board { get; set; }
+        public ISurface Board { get; set; }
         #endregion
 
         #region Ctor
         public ConsoleManager(string[] args)
         {
-            //TODO: ASK: IT IS TRUE? Так безопасно? если массив строк то у нас поидее и так норм.
             _args = (string[])args.Clone(); 
             CheckArguments();
         }
@@ -52,12 +51,8 @@ namespace ElementaryTasks
         }
         public void PrintResult()
         {
-            Console.Clear();
             Board = new ChessBoard(result.Height, result.Width);
         }
-
-        //TODO: Set Console size
-        //TODO: Check ConsoleSize, if SIZE>ConsSize =reinput
 
         private void ShowInstruction()
         {

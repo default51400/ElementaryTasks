@@ -4,8 +4,9 @@ namespace ElementaryTasks
 {
     public class ConsoleUI : IDraw
     {
-        public void Draw(ISurface<ICell> board)
+        public void Draw(ISurface board)
         {
+            Console.Clear();
             for (int i = 0; i < board.Height; i++)
             {
                 for (int j = 0; j < board.Width; j++)

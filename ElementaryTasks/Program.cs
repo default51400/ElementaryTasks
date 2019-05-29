@@ -10,9 +10,19 @@ namespace ElementaryTasks
     {
         static void Main(string[] args)
         {
-            ConsoleManager consoleManager = new ConsoleManager(args);
-            IDraw consoleUI = new ConsoleUI();
-            consoleUI.Draw(consoleManager.Board);
+            try
+            {
+                ConsoleManager consoleManager = new ConsoleManager(args);
+                IDraw consoleUI = new ConsoleUI();
+                consoleUI.Draw(consoleManager.Board);
+                //Valid + create border
+
+            }
+            catch (Exception)
+            {
+
+                //UI.Error(string error)
+            }
         }
     }
 

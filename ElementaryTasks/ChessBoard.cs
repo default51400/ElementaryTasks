@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ElementaryTasks
 {
-    public class ChessBoard : ISurface<ICell>
+    public class ChessBoard : ISurface
     {
         #region Fields & CONST
         private const int DEFAULT_HEIGHT = 8;
@@ -49,7 +49,6 @@ namespace ElementaryTasks
         public Cell[,] GetEmptySurface()
         {
             Cells = new Cell[Height, Width];
-            
             for (int i = 0; i < Height; i++)
             {
                 for (int j = 0; j < Width; j++)

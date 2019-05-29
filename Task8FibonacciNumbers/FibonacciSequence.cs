@@ -1,74 +1,37 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 using Task7NumericSequence;
 
 namespace Task8FibonacciNumbers
 {
-    public class FibonacciSequence: Sequence
+    public class FibonacciSequence : Sequence
     {
-        public FibonacciSequence(int leftNumber, int rightNumber): base(leftNumber, rightNumber)
+        private readonly int _previous;
+        private readonly int _current;
+        private readonly int _next;
+        public FibonacciSequence(int leftNumber, int rightNumber) : base(leftNumber, rightNumber)
         {
+            _current = leftNumber;
+            _next = rightNumber;
         }
 
         public override IEnumerable<int> GetSequenceCollection()
         {
-            int previous = 0;
-            int current = 1;
-            
-            while (previous + current <= RightNumber)
+            int current = 0;
+            int next = 1;
+            while (true)
             {
-                yield return previous;
-
-                int next = previous + current;
-                previous = current;
-                current = next;
-
-                if (current > LeftNumber)
+                if (current >= LeftNumber && current <= RightNumber)
                     yield return current;
+                int temp = next;
+                next = current + next;
+                current = temp;
+
+                if (current > RightNumber)
+                    yield break;
             }
-            //if (n < 0)
-            //    throw new ArgumentException("The value must be > 0.");
-            //if (n == 0)
-            //    yield return 0;
-            //if (n == 1)
-            //    yield return 1;
-
-            //for (int i = 0; i < n; i++)
-            //{
-            //    yield return (i - 1) + (i - 2);
-            //}
         }
-        public override StringBuilder GetStringSequence(IEnumerable<int> sequenceCollection)
-        {
-            StringBuilder result = new StringBuilder();
-            bool firstNumber = true;
-
-            foreach (var number in sequenceCollection)
-            {
-                if (number >= LeftNumber && number <= RightNumber)
-                {
-                    if (firstNumber)
-                    {
-                        result.Append(number);
-                        firstNumber = false;
-                    }
-                    else
-                    {
-                        result.Append(", ");
-                        result.Append(number);
-                    }
-                }
-                
-            }
-
-            return result;
-        }
-        
 
         //public IEnumerable<int> GetRangeSequence(int startRange, int endRange)
         //{
@@ -107,4 +70,4 @@ namespace Task8FibonacciNumbers
         //    //return currentString.Remove(currentString.Length-2, 1).ToString();
         //}
     }
-}       
+}

@@ -8,6 +8,6 @@ namespace ElementaryTasks
 {
     public interface IDraw
     {
-        void Draw(ISurface<ICell> board);
+        void Draw(ISurface board);
     }
 }

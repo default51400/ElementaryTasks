@@ -29,10 +29,7 @@ namespace Task8FibonacciNumbers
                                 return true;
                             }
                             else
-                            {
-                                //return false;
                                 throw new ArgumentException("Values must be > 0");
-                            }
                         }
                         else
                         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ElementaryTasks
 {
-    public class Cell : ICell
+    public class Cell
     {
         #region Props
         public int Height { get; set; }

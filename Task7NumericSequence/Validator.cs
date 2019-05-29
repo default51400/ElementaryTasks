@@ -20,23 +20,13 @@ namespace Task7NumericSequence
                     if (int.TryParse(args[0], out int finalNumber))
                     {
                         if (finalNumber >= 0) 
-                        {
-                            if (finalNumber > 2147483647)
-                            {
-                                throw new ArgumentException("Value must be < 2147483647");
-                            }
                             return true;
-                        }
                         else
-                        {
                             throw new ArgumentException("Values must be > 0");
-                        }
 
                     }
                     else
-                    {
                         throw new ArgumentException("Values is not integer. (Min value = -2147483648, max value = 2147483647)");
-                    }
 
                 default:
                     throw new ArgumentException("There should be 1 variables");

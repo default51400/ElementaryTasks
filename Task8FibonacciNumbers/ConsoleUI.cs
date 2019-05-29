@@ -77,6 +77,7 @@ namespace Task8FibonacciNumbers
         {
             Console.Write("Please input correct: ");
             ShowValues(Console.ReadLine().Split());
+            //TODO: неработает 2х неправильно
         }
     }
 }
