@@ -11,11 +11,9 @@ namespace ElementaryTasks
         #region Fields
         private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
         private string[] _args;
-        private BoardArgumentsValidationResult result;
         #endregion
 
         #region Props
-        public ISurface Board { get; set; }
         #endregion
 
         #region Ctor
@@ -28,38 +26,23 @@ namespace ElementaryTasks
 
         private void CheckArguments()
         {
-            try
-            {
-                result = Validator.IsValid(_args);
-                if (result.IsValid)
-                    PrintResult();
-                else
-                    throw new ArgumentException("Arguments are not valid.", result.Exception);
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine("\nAttention:\n" + ex.Message + "\t" + ex?.InnerException.Message);
-                ShowInstruction();
-                ReInput();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("\nAttention:\n" + ex.Message);
-                ShowInstruction();
-                ReInput();
-            }
+            
         }
-        public void PrintResult()
+        public void ShowErrorMessage(string text)
         {
-            Board = new ChessBoard(result.Height, result.Width);
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(text);
+            Console.ResetColor();
         }
 
-        private void ShowInstruction()
+        private void ShowInstruction(string text)
         {
             Console.WriteLine(LINE_SEPARATOR);
-            Console.WriteLine("Please read instruction for setting height and width of chess board:");
-            Console.WriteLine("Input supports only two unsigned integer number separated by witespace (\"_\"). (Example: 8 8)");
+            Console.WriteLine(text);
+            //Console.WriteLine("Please read instruction for setting height and width of chess board:");
+            //Console.WriteLine("Input supports only two unsigned integer number separated by witespace (\"_\"). (Example: 8 8)");
             Console.WriteLine(LINE_SEPARATOR);
+            Console.WriteLine();
         }
 
         private void ReInput()

@@ -7,14 +7,7 @@ namespace Task8FibonacciNumbers
 {
     public class FibonacciSequence : Sequence
     {
-        private readonly int _previous;
-        private readonly int _current;
-        private readonly int _next;
-        public FibonacciSequence(int leftNumber, int rightNumber) : base(leftNumber, rightNumber)
-        {
-            _current = leftNumber;
-            _next = rightNumber;
-        }
+        public FibonacciSequence(int leftNumber, int rightNumber) : base(leftNumber, rightNumber) { }
 
         public override IEnumerable<int> GetSequenceCollection()
         {

@@ -7,7 +7,7 @@ namespace ElementaryTasks.tests.ChessBoard
     public class ChessBoardTests
     {
         public TestContext TestContext { get; set; }
-        public ISurface<ICell>  board = new ElementaryTasks.ChessBoard();  //if ChessBoard -> Error CS0118	'ChessBoard' is a namespace but is used like a type ElementaryTasks.Tests C:\Users\Al.Panda\source\repos\ElementaryTasks\ElementaryTasks.tests\ChessBoard\ChessBoardTests.cs	10	Active
+        public ISurface  board = new ElementaryTasks.ChessBoard();  //if ChessBoard -> Error CS0118	'ChessBoard' is a namespace but is used like a type ElementaryTasks.Tests C:\Users\Al.Panda\source\repos\ElementaryTasks\ElementaryTasks.tests\ChessBoard\ChessBoardTests.cs	10	Active
 
 
             [DataSource("Microsoft.VisualStudio.TestTools.DataSource.XML", 

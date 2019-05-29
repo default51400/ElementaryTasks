@@ -5,34 +5,27 @@ namespace ElementaryTasks
     public static class Validator
     {
         private const int MAX_VALUE = 30;//TODO: TO UserConfig
-        public static BoardArgumentsValidationResult IsValid(string[] args)
+        public static bool IsValid(string[] args, out int height, out int width)
         {
-            BoardArgumentsValidationResult result = new BoardArgumentsValidationResult();
             switch (args.Length)
             {
                 //args.Lenght only = 2, because two-dimensional plane of ChessBoard
-                case 2://TODO: Change number 2
-                    if (int.TryParse(args[0], out int height) && int.TryParse(args[1], out int width))
+                case 2:
+                    if (int.TryParse(args[0], out int parsedHeight) && int.TryParse(args[1], out int parsedWidth))
                     {
-                        if ((height > 0) && (width > 0) && (height < MAX_VALUE) && (width < MAX_VALUE))
+                        if ((parsedHeight > 0) && (parsedWidth > 0) && (parsedHeight < MAX_VALUE) && (parsedWidth < MAX_VALUE))
                         {
-                            result.IsValid = true;
-                            result.Height = height;
-                            result.Width = width;
+                            height = parsedHeight;
+                            width = parsedWidth;
+                            return true;
                         }
-                        //TODO: ASK about MAX VALUE
-                        //TODO: result.Description || уйти от ексепшн
-                        else result.Exception = new ArgumentException($"Values must be > 0 and less {MAX_VALUE}.");
+                        else throw new ArgumentException($"Values must be > 0 and less {MAX_VALUE}.");
                     }
-                    else result.Exception = new ArgumentException($"Values is not integer.");
-                    break;
+                    else throw new ArgumentException($"Values is not integer.");
 
                 default:
-                    result.Exception = new ArgumentException($"Count of input values = {args.Length}. Count values must be = 2.");
-                    break;
+                    throw new ArgumentException($"Count of input values = {args.Length}. Count values must be = 2.");
             }
-
-            return result;
         }
     }
 }

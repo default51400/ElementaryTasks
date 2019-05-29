@@ -15,13 +15,25 @@ namespace ElementaryTasks
                 ConsoleManager consoleManager = new ConsoleManager(args);
                 IDraw consoleUI = new ConsoleUI();
                 consoleUI.Draw(consoleManager.Board);
+                
                 //Valid + create border
-
+                result = Validator.IsValid(_args);
+                if (result.IsValid)
+                    PrintResult();
             }
-            catch (Exception)
+            catch (ArgumentException ex)
             {
-
-                //UI.Error(string error)
+            //UI.Error(string error)
+                Console.WriteLine("\nAttention:\n" + ex.Message + "\t" + ex?.InnerException.Message);
+                ShowInstruction();
+                ReInput();
+            }
+            catch (Exception ex)
+            {
+                 //UI.Error(string error)
+                Console.WriteLine("\nAttention:\n" + ex.Message);
+                ShowInstruction();
+                ReInput();
             }
         }
     }
