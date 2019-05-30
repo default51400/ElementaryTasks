@@ -8,32 +8,33 @@ namespace ElementaryTasks
 {
     class Program
     {
+        private const string INSTRUCTION = "Please read instruction for setting height and width of chess board:\n" +
+            "Input supports only two unsigned integer number separated by witespace (\"_\"). (Example: 8 8)";
+
         static void Main(string[] args)
         {
+            IView view = new ConsoleView();
             try
             {
-                ConsoleManager consoleManager = new ConsoleManager(args);
-                IDraw consoleUI = new ConsoleUI();
-                consoleUI.Draw(consoleManager.Board);
-                
-                //Valid + create border
-                result = Validator.IsValid(_args);
-                if (result.IsValid)
-                    PrintResult();
+                if (Validator.IsValid(args, out int height, out int width))
+                {
+                    
+                    IDraw ui = new ConsoleUI();
+                    ISurface board = new ChessBoard(height, width);
+                    ui.Draw(board);
+                }
             }
             catch (ArgumentException ex)
             {
-            //UI.Error(string error)
-                Console.WriteLine("\nAttention:\n" + ex.Message + "\t" + ex?.InnerException.Message);
-                ShowInstruction();
-                ReInput();
+                view.ShowErrorMessage(ex.Message);
+                view.ShowInstruction(INSTRUCTION);
+                //ReInput();
             }
             catch (Exception ex)
             {
-                 //UI.Error(string error)
-                Console.WriteLine("\nAttention:\n" + ex.Message);
-                ShowInstruction();
-                ReInput();
+                view.ShowErrorMessage(ex.Message);
+                view.ShowInstruction(INSTRUCTION);
+                //ReInput();
             }
         }
     }

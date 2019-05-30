@@ -5,12 +5,13 @@ namespace ElementaryTasks
     public static class Validator
     {
         private const int MAX_VALUE = 30;//TODO: TO UserConfig
+        private const int DEFAULT_BOARD_PARAMS_COUNT = 2;
+
         public static bool IsValid(string[] args, out int height, out int width)
         {
             switch (args.Length)
             {
-                //args.Lenght only = 2, because two-dimensional plane of ChessBoard
-                case 2:
+                case DEFAULT_BOARD_PARAMS_COUNT:
                     if (int.TryParse(args[0], out int parsedHeight) && int.TryParse(args[1], out int parsedWidth))
                     {
                         if ((parsedHeight > 0) && (parsedWidth > 0) && (parsedHeight < MAX_VALUE) && (parsedWidth < MAX_VALUE))
