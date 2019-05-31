@@ -4,6 +4,7 @@
     {
         void ShowErrorMessage(string text);
         void ShowInstruction(string text);
-        void ShowResult(IDraw ui);
+        void ShowSurface(ISurface surface);
+        string[] ReInput();
     }
 }

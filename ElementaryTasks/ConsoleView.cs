@@ -8,15 +8,9 @@ namespace ElementaryTasks
 {
     public class ConsoleView: IView
     {
-        #region Fields
         private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
-        #endregion
-
-        #region Ctor
-        public ConsoleView()
-        {
-        }
-        #endregion
+        
+        private IDraw _userInterface;
 
         #region Methods
         public void ShowErrorMessage(string text)
@@ -35,18 +29,19 @@ namespace ElementaryTasks
             Console.WriteLine();
         }
 
-        public void ShowResult(IDraw ui)
+        public void ShowSurface(ISurface surface)
         {
-            //ui.Draw
+            _userInterface = new ConsoleUI();
+            _userInterface.Draw(surface);
         }
 
-        private void ReInput()
+        //TODO: Ask about dependency injection
+        public string[] ReInput()
         {
-            //TODO: ONE VALIDATE
-            Console.Write("\nPlease input correct: ");
             string inputValue = Console.ReadLine();
-            //_args = inputValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            //CheckArguments();
+            string[] arguments = inputValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            return arguments;
         }
         #endregion
     }
