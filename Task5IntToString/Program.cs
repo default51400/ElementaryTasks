@@ -10,6 +10,7 @@ namespace Task5IntToString
     {
         static void Main(string[] args)
         {
+            //do milliarda
         }
     }
 }

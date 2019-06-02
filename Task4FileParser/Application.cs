@@ -5,18 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElementaryTasks
+namespace Task4FileParser
 {
     public class Application
     {
         private string[] _args;
         private IView _view;
-        private ISurface _board;
+        private Parser _parser;
 
         public Application()
         {
             _view = new ConsoleView();
         }
+
         public Application(IView view)
         {
             _view = view;
@@ -32,10 +33,22 @@ namespace ElementaryTasks
             _args = (string[])args.Clone();
             try
             { 
-                if (Validator.IsValid(_args, out int height, out int width))
+                if (Validator.IsValid(_args, out WorkMode mode))
                 {
-                    _board = new ChessBoard(height, width);
-                    _view.ShowSurface(_board);
+                    if (mode == WorkMode.Find)
+                    {
+                        _parser = new Parser(_args[0]);
+                        //TODO: Refactoring string
+                        _view.ShowResult($"File {_args[0]}: Count entries \"{_args[1]}\" = {_parser.GetCountEntries(_args[1])}");
+                    }
+
+                    if (mode == WorkMode.Replace)
+                    {
+                        _parser = new Parser(_args[0]);
+                        _parser.ReplaceAll(_args[1], _args[2]);
+                        _view.ShowResult($"File {_args[0]}: String \"{_args[1]}\" have been replaced to \"{_args[2]}\" Count = {_parser.GetCountEntries(_args[2])} times");
+                        /*VIEW ();*/
+                    }
                 }
             }
             catch (ArgumentException ex)

@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElementaryTasks
+namespace Task4FileParser
 {
     public class ConsoleView: IView
     {
         private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
         
-        private IDraw _userInterface;
-
         #region Methods
         public void ShowErrorMessage(string text)
         {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(text);
             Console.WriteLine();
             Console.ResetColor();
@@ -29,17 +27,28 @@ namespace ElementaryTasks
             Console.WriteLine();
         }
 
-        public void ShowSurface(ISurface surface)
+        public void ShowResult(string text)
         {
-            _userInterface = new ConsoleUI();
-            _userInterface.Draw(surface);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(LINE_SEPARATOR);
+            Console.WriteLine(text);
+            Console.WriteLine(LINE_SEPARATOR);
+            Console.WriteLine();
+            Console.ResetColor();
         }
 
-        //TODO: Ask about dependency injection to Application?
         public string[] ReInput()
         {
-            string inputValue = Console.ReadLine();
-            string[] arguments = inputValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            //TODO: ASK About 2-3 elements case Mode?? BUG string with space
+            string[] arguments = new string[3];
+            Console.Write("Path to file: ");//TODO: With file name
+            arguments[0] = Console.ReadLine();
+            Console.Write("Search string: ");
+            arguments[1] = Console.ReadLine();
+            
+            //only for replace mode
+            Console.Write("String to replace: ");
+            arguments[2] = Console.ReadLine();
 
             return arguments;
         }
