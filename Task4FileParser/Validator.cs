@@ -4,11 +4,6 @@ using System.IO;
 
 namespace Task4FileParser
 {
-    public enum WorkMode
-    {
-        Find = 2,
-        Replace = 3
-    }
     public static class Validator
     {
         
