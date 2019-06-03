@@ -11,7 +11,7 @@ namespace Task2EnvelopeAnalysis
     {
         private string[] _args;
         private IView _view;
-        private Envelope _envelope;
+        //private Envelope _envelope;
 
         public Application()
         {
