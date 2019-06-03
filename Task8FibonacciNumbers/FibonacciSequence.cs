@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-using Task7NumericSequence;
+using SharedDll;
 
 namespace Task8FibonacciNumbers
 {

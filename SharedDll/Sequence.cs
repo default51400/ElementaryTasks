@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task7NumericSequence
+namespace SharedDll
 {
     public abstract class Sequence
     {

@@ -53,9 +53,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Task7NumericSequence\Task7NumericSequence.csproj">
-      <Project>{f0aa373c-093e-4e96-a133-b9f1d690f4b3}</Project>
-      <Name>Task7NumericSequence</Name>
+    <ProjectReference Include="..\SharedDll\SharedDll.csproj">
+      <Project>{82d0a40f-56b0-4b62-88b1-986daa86a852}</Project>
+      <Name>SharedDll</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

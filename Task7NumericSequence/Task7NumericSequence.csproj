@@ -47,11 +47,16 @@
     <Compile Include="NumericSequence.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sequence.cs" />
     <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedDll\SharedDll.csproj">
+      <Project>{82d0a40f-56b0-4b62-88b1-986daa86a852}</Project>
+      <Name>SharedDll</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

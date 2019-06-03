@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using SharedDll;
+
 namespace Task7NumericSequence
 {
     class ConsoleUI
