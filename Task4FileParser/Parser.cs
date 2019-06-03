@@ -16,6 +16,7 @@ namespace Task4FileParser
             Path = path;
         }
 
+        #region Methods
         public virtual int GetCountEntries(string searchingString)
         {
             int countEntry = 0;
@@ -112,4 +113,5 @@ namespace Task4FileParser
             return countEntry;
         }
     }
+    #endregion
 }
