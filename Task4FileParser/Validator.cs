@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Configuration;
 using System.IO;
 
 namespace Task4FileParser
 {
     public static class Validator
     {
-        
         public static bool IsValid(string[] args, out WorkMode mode)
         {
             switch (args.Length)

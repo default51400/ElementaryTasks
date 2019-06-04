@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Configuration;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+using SharedDll;
 
 namespace Task4FileParser
 {
@@ -38,7 +36,6 @@ namespace Task4FileParser
                     if (mode == WorkMode.Find)
                     {
                         _parser = new Parser(_args[0]);
-                        //TODO: Refactoring string
                         _view.ShowResult($"File {_args[0]}: Count entries \"{_args[1]}\" = {_parser.GetCountEntries(_args[1])}");
                     }
 
@@ -47,7 +44,6 @@ namespace Task4FileParser
                         _parser = new Parser(_args[0]);
                         _parser.ReplaceAll(_args[1], _args[2]);
                         _view.ShowResult($"File {_args[0]}: String \"{_args[1]}\" have been replaced to \"{_args[2]}\" Count = {_parser.GetCountEntries(_args[2])} times");
-                        /*VIEW ();*/
                     }
                 }
             }

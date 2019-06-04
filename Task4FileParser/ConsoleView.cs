@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SharedDll;
+using System;
 
 namespace Task4FileParser
 {
-    public class ConsoleView: IView
+    public class ConsoleView : IView
     {
         private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
-        
+
         #region Methods
         public void ShowErrorMessage(string text)
         {
@@ -45,7 +42,7 @@ namespace Task4FileParser
             arguments[0] = Console.ReadLine();
             Console.Write("Search string: ");
             arguments[1] = Console.ReadLine();
-            
+
             //only for replace mode
             Console.Write("String to replace: ");
             arguments[2] = Console.ReadLine();

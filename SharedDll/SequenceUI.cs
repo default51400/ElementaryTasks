@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElementaryTasks
+namespace SharedDll
 {
-    public class ConsoleView: IView
+    public class SequenceUI : IView
     {
         private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
-        
+
         #region Methods
         public void ShowErrorMessage(string text)
         {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(text);
             Console.WriteLine();
             Console.ResetColor();
@@ -29,15 +29,18 @@ namespace ElementaryTasks
 
         public void ShowResult(string text)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(LINE_SEPARATOR);
             Console.WriteLine(text);
+            Console.WriteLine(LINE_SEPARATOR);
             Console.WriteLine();
             Console.ResetColor();
         }
 
         public string[] ReInput()
         {
-            string inputValue = Console.ReadLine();
-            string[] arguments = inputValue.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            Console.Write("Please input correct: ");
+            string[] arguments = Console.ReadLine().Split();
 
             return arguments;
         }

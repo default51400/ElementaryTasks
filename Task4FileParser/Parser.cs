@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Task4FileParser
 {
@@ -17,6 +14,11 @@ namespace Task4FileParser
         }
 
         #region Methods
+        /// <summary>
+        /// Get count entries string in the text 
+        /// </summary>
+        /// <param name="searchingString">searching string</param>
+        /// <returns>count entries</returns>
         public virtual int GetCountEntries(string searchingString)
         {
             int countEntry = 0;
@@ -34,10 +36,18 @@ namespace Task4FileParser
                     line.Clear();
                 }
             }
-
+            
             return countEntry;
         }
         
+        /// <summary>
+        /// Make a replacement searching string to other:
+        /// Create tmp file in the current directory, read base file by lines,
+        /// and write to tmp. If entry string => replace. 
+        /// After all content is swap(tmp,base) and delete tmp file. 
+        /// </summary>
+        /// <param name="searchingString">searching string</param>
+        /// <param name="replacementString">string for replace</param>
         public virtual void ReplaceAll(string searchingString, string replacementString)
         {
             int countEntry = 0;
@@ -92,8 +102,6 @@ namespace Task4FileParser
                 throw new IOException($"File save failed: {tempFileName} \nException: {ex.Message}");
             }
         }
-
-       
 
         private static int GetCountEntry(string line, string searchingString)
         {

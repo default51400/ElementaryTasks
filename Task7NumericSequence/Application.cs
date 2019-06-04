@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Configuration;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ElementaryTasks
+using SharedDll;
+
+namespace Task7NumericSequence
 {
     public class Application
     {
         private string[] _args;
         private IView _view;
-        private ISurface _board;
-        IDraw _userInterface;
 
         public Application()
         {
-            _view = new ConsoleView();
+            _view = new SequenceUI();
         }
+
         public Application(IView view)
         {
             _view = view;
@@ -32,14 +30,19 @@ namespace ElementaryTasks
         {
             _args = (string[])args.Clone();
             try
-            { 
-                if (Validator.IsValid(_args, out int height, out int width))
+            {
+                if (Validator.IsValid(args))
                 {
-                    _board = new ChessBoard(height, width);
+                    Sequence sequence = new NumericSequence(int.Parse(args[0]));
+                    IEnumerable<int> sequenceCollection = sequence.GetSequenceCollection();
 
-                    _userInterface = new ConsoleUI();
-                    _userInterface.Draw(_board);
+                    _view.ShowResult(sequence.GetStringSequence(sequenceCollection).ToString());
                 }
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                _view.ShowErrorMessage(ex.Message);
+                Run();
             }
             catch (ArgumentException ex)
             {
