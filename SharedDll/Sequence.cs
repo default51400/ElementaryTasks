@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SharedDll
 {
     public abstract class Sequence
     {
+        
         public virtual int LeftNumber { get; private set; }
         public int RightNumber { get; private set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="leftNumber">lowest number</param>
+        /// <param name="rightNumber">higher number</param>
         public Sequence(int leftNumber, int rightNumber)
         {
             this.LeftNumber = leftNumber;
@@ -19,6 +22,11 @@ namespace SharedDll
 
         public abstract IEnumerable<int> GetSequenceCollection();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sequenceCollection">IEnumerable<int> Collection</param>
+        /// <returns>string wich have collection int numbers, divided by comma ", " </returns>
         public virtual StringBuilder GetStringSequence(IEnumerable<int> sequenceCollection)
         {
             StringBuilder result = new StringBuilder();

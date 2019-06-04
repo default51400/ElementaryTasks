@@ -8,23 +8,27 @@ namespace ElementaryTasks.tests.FileParser
     [TestClass]
     public class FileParserTests
     {
-        //[TestMethod]
-        //[DataRow("text.txt", "ONENUMBER", 0)]
-        //public void GetCountEntries()
-        //{
-        //    // Arrange
-        //    string path = "text.txt";
-        //    string find = "ONENUMBER";
-        //    int count = 0;
-        //    Parser parser = new Parser(path);
+        [TestMethod]
+        public void GetCountEntries()
+        {
+            // Arrange
+            string path = "test2.txt";
+            string find = "ONENUMBER";
+            int expected = 0;
 
+            // Act
+            if (File.Exists(path))
+                File.Delete(path);
+            using (File.Create(path)) { }
+            File.WriteAllText(path, "One, Two, Three\r\n Two, Three\r\n");
 
-        //    // Act
-        //    int real = parser.GetCountEntries(find);
+            Parser parser = new Parser(path);
+            int actual = parser.GetCountEntries(find);
 
-        //    // Assert
-        //    Assert.AreEqual(real, count);
-        //}
+            // Assert
+            Assert.AreEqual(expected, actual);
+
+        }
 
         [TestMethod]
         public void ParserReplaceAll_TwoReplace2_Replaced()
