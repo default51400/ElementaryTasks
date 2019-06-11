@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Configuration;
-
-using SharedDll;
+using NLog;
+using SharedLibrary;
 
 namespace Task4FileParser
 {
     public class Application
     {
+        #region Fields
+
         private string[] _args;
         private IView _view;
         private Parser _parser;
+        Logger _logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+        #region Ctors
 
         public Application()
         {
@@ -21,42 +28,85 @@ namespace Task4FileParser
             _view = view;
         }
 
+        #endregion
+
+        #region Methods
         public virtual void Run()
         {
+            _logger.Trace("Application start without arguments");
             _view.ShowInstruction(ConfigurationManager.AppSettings["Instruction"]);
-            Run(_view.ReInput());
+
+            if (ConfigurationManager.AppSettings["ReInputMode"].ToLower() == "true")
+            {
+                _logger.Trace("ReInput mode started");
+                Run(_view.ReInput());
+            }
         }
         public virtual void Run(string[] args)
         {
             _args = (string[])args.Clone();
+
+            _logger.Info($"Application run with arguments: ");
+            foreach (var item in _args)
+            {
+                _logger.Trace(item + " ");
+            }
             try
-            { 
-                if (Validator.IsValid(_args, out WorkMode mode))
+            {
+                if (Validator.IsValid(_args) && Validator.IsFileExists(_args))
                 {
-                    if (mode == WorkMode.Find)
+                    InputModel input = new InputModel(_args);
+                    
+                    if (input.WorkMode == WorkMode.Find)
                     {
-                        _parser = new Parser(_args[0]);
-                        _view.ShowResult($"File {_args[0]}: Count entries \"{_args[1]}\" = {_parser.GetCountEntries(_args[1])}");
+                        _parser = new Parser(input.Source);
+                        int count = _parser.GetCountEntries(input.SearchingString);
+
+                        string result = $"File {input.Source}: Count entries \"{input.SearchingString}\" = {count}";
+
+                        _view.ShowResult(result);
+                        _logger.Info($"Application run with valid arguments: {input.Source}, {input.SearchingString}");
+                        _logger.Info($"Show result:\n {result}");
+
                     }
 
-                    if (mode == WorkMode.Replace)
+                    if (input.WorkMode == WorkMode.Replace)
                     {
-                        _parser = new Parser(_args[0]);
-                        _parser.ReplaceAll(_args[1], _args[2]);
-                        _view.ShowResult($"File {_args[0]}: String \"{_args[1]}\" have been replaced to \"{_args[2]}\" Count = {_parser.GetCountEntries(_args[2])} times");
+                        _parser = new Parser(input.Source);
+                        _parser.ReplaceAll(input.SearchingString, input.ReplacementString);
+
+                        string result = $"File {input.Source}: String \"{input.SearchingString}\" " +
+                            $"have been replaced to \"{input.ReplacementString}\" ";
+
+                        _view.ShowResult(result);
+                        _logger.Info($"Application run with valid arguments: {input.Source}," +
+                            $" {input.SearchingString}, {input.ReplacementString}");
+                        _logger.Info($"Show result:\n {result}");
                     }
                 }
             }
             catch (ArgumentException ex)
             {
                 _view.ShowErrorMessage(ex.Message);
+                _logger.Error(ex.Message);
                 Run();
+
+            }
+            catch (NullReferenceException ex)
+            {
+                _view.ShowErrorMessage("Attention" + ex.Message);
+                _logger.Error(ex.Message);
+                Run();
+
             }
             catch (Exception ex)
             {
-                _view.ShowErrorMessage(ex.Message);
+                _view.ShowErrorMessage("Attention" + ex.Message);
+                _logger.Error(ex.Message);
                 Run();
             }
         }
+
+        #endregion
     }
 }

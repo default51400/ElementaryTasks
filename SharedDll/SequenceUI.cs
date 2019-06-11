@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SharedDll
+namespace SharedLibrary
 {
     public class SequenceUI : IView
     {
-        private const string LINE_SEPARATOR = "---------------------------------------------------------------------------";
-
         #region Methods
+
         public void ShowErrorMessage(string text)
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -21,29 +20,51 @@ namespace SharedDll
 
         public void ShowInstruction(string text)
         {
-            Console.WriteLine(LINE_SEPARATOR);
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            ShowSeparator();
             Console.WriteLine(text);
-            Console.WriteLine(LINE_SEPARATOR);
-            Console.WriteLine();
-        }
-
-        public void ShowResult(string text)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(LINE_SEPARATOR);
-            Console.WriteLine(text);
-            Console.WriteLine(LINE_SEPARATOR);
+            ShowSeparator();
             Console.WriteLine();
             Console.ResetColor();
         }
 
+        public void ShowResult(string text)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            ShowSeparator();
+            Console.WriteLine(text);
+            ShowSeparator();
+            Console.WriteLine();
+            Console.ResetColor();
+        }
+
+        private void ShowSeparator()
+        {
+            Console.WriteLine(new string('-', Console.WindowWidth));
+        }
+
         public string[] ReInput()
         {
-            Console.Write("Please input correct: ");
-            string[] arguments = Console.ReadLine().Split();
+            Console.WriteLine("Press Enter to ReInput mode or Escape(esc) to EXIT");
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (key.Key.Equals(ConsoleKey.Escape))
+                Environment.Exit(0);
+            else
+                if (key.Key.Equals(ConsoleKey.Enter))
+            {
+                Console.Write("Please input correct: ");
+                string[] arguments = Console.ReadLine().Split();
+                return arguments;
+            }
+            else
+            {
+                ShowErrorMessage("\nInvalid input.");
+                ReInput();
+            }
 
-            return arguments;
+            return null;
         }
+
         #endregion
     }
 }
