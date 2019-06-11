@@ -8,49 +8,93 @@ namespace ElementaryTasks.tests.FileParser
     [TestClass]
     public class FileParserTests
     {
-        [TestMethod]
-        public void GetCountEntries()
+        Parser _parser;
+        private static string _mainPath;
+        private static string _testPath;
+
+        #region Inits
+
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext context)
         {
-            // Arrange
-            string path = "test2.txt";
+            _testPath = "test.txt";
+            using (File.Create(_testPath)) { }
+            _mainPath = "main.txt";
+            using (File.Create(_mainPath)) { }
+            File.WriteAllText(_mainPath, "One, Two, Three\r\n Two, Three\r\n");
+
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            File.Copy(_mainPath, _testPath, true);
+
+            _parser = new Parser(_testPath);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+        }
+
+        #endregion
+
+        #region AreEquals
+
+        [TestMethod]
+        public void ParserGetCountEntries_ONENUMBERfindInPath_Return0()
+        {
             string find = "ONENUMBER";
             int expected = 0;
 
-            // Act
-            if (File.Exists(path))
-                File.Delete(path);
-            using (File.Create(path)) { }
-            File.WriteAllText(path, "One, Two, Three\r\n Two, Three\r\n");
+            int actual = _parser.GetCountEntries(find);
 
-            Parser parser = new Parser(path);
-            int actual = parser.GetCountEntries(find);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetCountEntries_SearchThree_Return2()
+        {
+            // Arrange
+            string searchingString = "Three";
+            int expected = 2;
+
+            // Act
+            int real = _parser.GetCountEntries(searchingString);
 
             // Assert
-            Assert.AreEqual(expected, actual);
-
+            Assert.AreEqual(real, expected);
         }
 
         [TestMethod]
         public void ParserReplaceAll_TwoReplace2_Replaced()
         {
             //Arrange
-            string path = "test.txt";
-            if (File.Exists(path))
-                File.Delete(path);
-            using (File.Create(path)) { }
-            File.WriteAllText(path, "One, Two, Three\r\n Two, Three\r\n");
-            
+            string searching = "Two";
+            string replacing = "2";
             string expected = "One, 2, Three\r\n 2, Three\r\n";
 
             //Act
-            Parser parser = new Parser(path);
-            parser.ReplaceAll("Two", "2");
+            _parser.ReplaceAll(searching, replacing);
+            string actual = File.ReadAllText(_testPath);
 
             //Assert
-            string actual = File.ReadAllText(path);
             Assert.AreEqual(expected, actual);
         }
-        //cr file -> one -> replace two -> Check replace. +checkException + checkReturn0->returnExValue0
+           
+        #endregion
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ParserReplaceAll_NUMBERReplace1_ArgumentException()
+        {
+            string searching = "NUMBER";
+            string replacing = "1";
+
+            _parser.ReplaceAll(searching, replacing);
+        }
 
     }
 }
